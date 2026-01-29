@@ -1,0 +1,16 @@
+# Requirements para Proyecto de Análisis de Churn - Regresión Logística
+# Python >= 3.8
+
+# Data manipulation and analysis
+pandas>=1.5.0
+numpy>=1.23.0
+
+# Machine Learning
+scikit-learn>=1.2.0
+
+# Visualization
+matplotlib>=3.6.0
+seaborn>=0.12.0
+
+# Utility
+pathlib2>=2.3.7  # For Python < 3.4 compatibility (optional if using Python >= 3.4)
