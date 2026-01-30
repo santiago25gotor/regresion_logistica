@@ -50,9 +50,9 @@ def interpretar_coeficientes(model, feature_names, top_n=15):
         odds_interp = "multiplica" if row['odds_ratio'] > 1 else "divide"
         
         print(f"\n{row['variable']}:")
-        print(f"  • Coeficiente: {row['coeficiente']:.4f} ({signo})")
-        print(f"  • Odds Ratio: {row['odds_ratio']:.4f}")
-        print(f"  • Interpretación: Por cada unidad que aumenta esta variable,")
+        print(f"   Coeficiente: {row['coeficiente']:.4f} ({signo})")
+        print(f"   Odds Ratio: {row['odds_ratio']:.4f}")
+        print(f"   Interpretación: Por cada unidad que aumenta esta variable,")
         print(f"    la probabilidad de Churn {direccion} (odds se {odds_interp} por {row['odds_ratio']:.2f})")
     
     
@@ -82,7 +82,7 @@ def interpretar_coeficientes(model, feature_names, top_n=15):
     save_path = FIGURES_DIR / 'coeficientes_interpretacion.png'
     plt.savefig(save_path, dpi=100, bbox_inches='tight')
     plt.close()
-    print(f"\n✓ Gráfico guardado: {save_path}")
+    print(f"\n Gráfico guardado: {save_path}")
     
     return coefs
 
@@ -154,7 +154,7 @@ def analizar_umbrales(y_test, probs):
     save_path = FIGURES_DIR / 'analisis_umbrales.png'
     plt.savefig(save_path, dpi=100, bbox_inches='tight')
     plt.close()
-    print(f"\n✓ Gráfico guardado: {save_path}")
+    print(f"\n Gráfico guardado: {save_path}")
     
     
     return df_umbrales
@@ -209,6 +209,6 @@ def evaluar_modelo(model, X_test, y_test, threshold: float = 0.5, show_roc: bool
         save_path = FIGURES_DIR / 'curvas_roc_pr.png'
         plt.savefig(save_path, dpi=100, bbox_inches='tight')
         plt.close()
-        print(f"\n✓ Gráfico guardado: {save_path}")
+        print(f"\n Gráfico guardado: {save_path}")
 
     return {"confusion_matrix": cm, "auc": auc_score, "probs": probs, "preds": preds}

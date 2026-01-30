@@ -115,7 +115,7 @@ def analisis_multicolinealidad(df: pd.DataFrame):
 def eda_bivariado_completo(df: pd.DataFrame, target: str = "Churn"):
     
     if target not in df.columns:
-        print(f"⚠️ No existe la columna target '{target}'.")
+        print(f" No existe la columna target '{target}'.")
         return
     
     print("\n" + "=" * 60)
@@ -153,7 +153,7 @@ def eda_bivariado_completo(df: pd.DataFrame, target: str = "Churn"):
         save_path = FIGURES_DIR / 'analisis_bivariado_numericas.png'
         plt.savefig(save_path, dpi=100, bbox_inches='tight')
         plt.close()
-        print(f"\n✓ Gráfico guardado: {save_path}")
+        print(f"\n Gráfico guardado: {save_path}")
     
     # Variables categóricas vs target
     cat_cols = df.select_dtypes(include='object').columns.tolist()
@@ -179,12 +179,12 @@ def eda_bivariado_completo(df: pd.DataFrame, target: str = "Churn"):
             plt.savefig(save_path, dpi=100, bbox_inches='tight')
             plt.close()
         
-        print(f"\n✓ Gráficos guardados para {min(len(cat_cols), 6)} variables categóricas en {FIGURES_DIR}")
+        print(f"\n Gráficos guardados para {min(len(cat_cols), 6)} variables categóricas en {FIGURES_DIR}")
 
 def eda_bivariado_basico(df: pd.DataFrame, target: str = "Churn"):
     
     if target not in df.columns:
-        print(f"⚠️ No existe la columna target '{target}'.")
+        print(f" No existe la columna target '{target}'.")
         return
 
     if "tenure" in df.columns:
