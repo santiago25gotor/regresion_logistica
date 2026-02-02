@@ -32,7 +32,7 @@ def main():
     print("PASO 1: CARGANDO DATOS...")
     print("="*60)
     df = cargar_datos()
-    print(f"✓ Datos cargados: {df.shape[0]} filas, {df.shape[1]} columnas")
+    print(f" Datos cargados: {df.shape[0]} filas, {df.shape[1]} columnas")
 
     
     print("\n" + "="*60)
@@ -40,12 +40,12 @@ def main():
     print("="*60)
     df_clean = limpiar_telco(df)
     df_ready = preparar_target(df_clean, target="Churn")
-    print(f"✓ Datos limpios: {df_ready.shape[0]} filas, {df_ready.shape[1]} columnas")
+    print(f"Datos limpios: {df_ready.shape[0]} filas, {df_ready.shape[1]} columnas")
     
   
     clean_path = DATA_PROCESSED / "telco_clean.csv"
     df_ready.to_csv(clean_path, index=False)
-    print(f"✓ CSV limpio guardado en: {clean_path}")
+    print(f"CSV limpio guardado en: {clean_path}")
 
   
     print("\n" + "="*60)
@@ -62,16 +62,16 @@ def main():
     print("PASO 4: TRANSFORMACIÓN Y DIVISIÓN DE DATOS...")
     print("="*60)
     X_train, X_test, y_train, y_test, scaler = transformar_y_dividir(df_ready)
-    print(f"✓ Conjunto de entrenamiento: {X_train.shape[0]} filas")
-    print(f"✓ Conjunto de prueba: {X_test.shape[0]} filas")
-    print(f"✓ Número de features: {X_train.shape[1]}")
+    print(f" Conjunto de entrenamiento: {X_train.shape[0]} filas")
+    print(f" Conjunto de prueba: {X_test.shape[0]} filas")
+    print(f" Número de features: {X_train.shape[1]}")
 
    
     print("\n" + "="*60)
     print("PASO 5: ENTRENAMIENTO DEL MODELO...")
     print("="*60)
     model = entrenar_logistica(X_train, y_train)
-    print("✓ Modelo de regresión logística entrenado")
+    print(" Modelo de regresión logística entrenado")
 
    
     print("\n" + "="*60)
@@ -81,15 +81,15 @@ def main():
     probs = visualizar_probabilidades(model, X_test, y_test)
     analizar_umbrales(y_test, probs)
     evaluar_modelo(model, X_test, y_test)
-    print(f"\n✓ Gráficos de evaluación guardados en: {FIGURES_DIR}")
+    print(f"\n Gráficos de evaluación guardados en: {FIGURES_DIR}")
 
     
     print("\n" + "="*60)
-    print("✓ PROCESO COMPLETADO EXITOSAMENTE")
+    print(" PROCESO COMPLETADO EXITOSAMENTE")
     print("="*60)
     print(f"\nArchivos generados:")
-    print(f"  📊 Gráficos: {FIGURES_DIR}/")
-    print(f"  📄 CSV limpio: {clean_path}")
+    print(f"   Gráficos: {FIGURES_DIR}/")
+    print(f"   CSV limpio: {clean_path}")
     print("\nRevisa los archivos generados para el análisis completo.")
     
 

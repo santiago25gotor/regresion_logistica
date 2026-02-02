@@ -15,11 +15,10 @@ def transformar_y_dividir(
     X = df.drop(columns=[target])
     y = df[target].astype(int)
 
-    # One-hot encoding para variables categóricas
+    #  variables categóricas
     X_encoded = pd.get_dummies(X, drop_first=True)
 
-    # Identificar numéricas (post get_dummies ya es todo numérico, pero escalamos solo continuas originales)
-    # Aquí escalamos columnas continuas típicas:
+
     numeric_candidates = ["tenure", "MonthlyCharges", "TotalCharges"]
     numeric_cols = [c for c in numeric_candidates if c in X_encoded.columns]
 

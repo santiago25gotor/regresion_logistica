@@ -89,7 +89,7 @@ def analisis_multicolinealidad(df: pd.DataFrame):
         print("\nMatriz de correlación:")
         print(corr_matrix)
         
-        # Visualización
+       
         plt.figure(figsize=(10, 8))
         sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', center=0, 
                     fmt='.2f', square=True, linewidths=1)
@@ -100,7 +100,7 @@ def analisis_multicolinealidad(df: pd.DataFrame):
         plt.close()
         print(f"\n✓ Gráfico guardado: {save_path}")
         
-        # Identificar pares altamente correlacionados
+       
         print("\nPares con correlación alta (|r| > 0.7):")
         alta_correlacion = False
         for i in range(len(corr_matrix.columns)):
@@ -134,14 +134,14 @@ def eda_bivariado_completo(df: pd.DataFrame, target: str = "Churn"):
             axes = axes.reshape(1, -1)
         
         for idx, col in enumerate(numeric_cols):
-            # Boxplot
+          
             df.boxplot(column=col, by=target, ax=axes[idx, 0])
             axes[idx, 0].set_title(f'{col} por {target}')
             axes[idx, 0].set_xlabel(target)
             plt.sca(axes[idx, 0])
             plt.xticks([1, 2], df[target].unique())
             
-            # Histogramas superpuestos
+            
             for label in df[target].unique():
                 subset = df[df[target] == label][col].dropna()
                 axes[idx, 1].hist(subset, bins=30, alpha=0.5, label=str(label))
@@ -155,13 +155,13 @@ def eda_bivariado_completo(df: pd.DataFrame, target: str = "Churn"):
         plt.close()
         print(f"\n Gráfico guardado: {save_path}")
     
-    # Variables categóricas vs target
+ 
     cat_cols = df.select_dtypes(include='object').columns.tolist()
     if target in cat_cols:
         cat_cols.remove(target)
     
     if cat_cols:
-        # Limitar a las 6 primeras variables categóricas más relevantes
+        
         for col in cat_cols[:6]:
             print(f"\nTabla de contingencia: {col} vs {target}")
             ct = pd.crosstab(df[col], df[target], normalize='index')

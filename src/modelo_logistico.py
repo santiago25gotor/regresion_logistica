@@ -8,7 +8,6 @@ from sklearn.metrics import (
 import matplotlib.pyplot as plt
 from pathlib import Path
 
-# Directorio para guardar figuras
 FIGURES_DIR = Path("outputs/figures")
 FIGURES_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -17,17 +16,14 @@ def entrenar_logistica(X_train, y_train, max_iter: int = 2000):
     model = LogisticRegression(
         max_iter=max_iter,
         class_weight="balanced",
-        solver="lbfgs",
+        solver="lbfgs", #En el contexto de Machine Learning, el solver es el método matemático que encuentra los mejores parámetros para tu modelo.
         random_state=42
     )
     model.fit(X_train, y_train)
     return model
 
 def interpretar_coeficientes(model, feature_names, top_n=15):
-   
-    print("\n" + "=" * 60)
-    print("INTERPRETACIÓN DE COEFICIENTES")
-    print("=" * 60)
+
     
     coefs = pd.DataFrame({
         'variable': feature_names,
@@ -39,9 +35,7 @@ def interpretar_coeficientes(model, feature_names, top_n=15):
     print(f"\nTop {top_n} variables más influyentes:")
     print(coefs.head(top_n).to_string(index=False))
     
-    print("\n" + "=" * 60)
-    print("INTERPRETACIÓN PRÁCTICA:")
-    print("=" * 60)
+   
     
     
     for idx, row in coefs.head(3).iterrows():
@@ -69,7 +63,7 @@ def interpretar_coeficientes(model, feature_names, top_n=15):
     axes[0].axvline(x=0, color='black', linestyle='--', linewidth=1)
     axes[0].invert_yaxis()
     
-    # Gráfico 2: Odds Ratios
+   
     axes[1].barh(range(len(top_coefs)), top_coefs['odds_ratio'], color=colors, alpha=0.7)
     axes[1].set_yticks(range(len(top_coefs)))
     axes[1].set_yticklabels(top_coefs['variable'])
@@ -87,10 +81,6 @@ def interpretar_coeficientes(model, feature_names, top_n=15):
     return coefs
 
 def visualizar_probabilidades(model, X_test, y_test):
-    
-    print("\n" + "=" * 60)
-    print("ANÁLISIS DE PROBABILIDADES PREDICHAS")
-    print("=" * 60)
     
     probs = model.predict_proba(X_test)[:, 1]
     
@@ -117,10 +107,6 @@ def visualizar_probabilidades(model, X_test, y_test):
     return probs
 
 def analizar_umbrales(y_test, probs):
-   
-    print("\n" + "=" * 60)
-    print("ANÁLISIS DE UMBRALES DE DECISIÓN")
-    print("=" * 60)
     
     from sklearn.metrics import precision_score, recall_score, f1_score
     
@@ -184,8 +170,7 @@ def evaluar_modelo(model, X_test, y_test, threshold: float = 0.5, show_roc: bool
 
     if show_roc:
         fig, axes = plt.subplots(1, 2, figsize=(14, 5))
-        
-        # Curva ROC
+      
         fpr, tpr, _ = roc_curve(y_test, probs)
         axes[0].plot(fpr, tpr, linewidth=2, label=f'ROC (AUC = {auc_score:.3f})')
         axes[0].plot([0, 1], [0, 1], linestyle="--", color='gray', label='Random')
@@ -195,7 +180,7 @@ def evaluar_modelo(model, X_test, y_test, threshold: float = 0.5, show_roc: bool
         axes[0].legend()
         axes[0].grid(True, alpha=0.3)
         
-        # Curva Precision-Recall
+        
         precision, recall, _ = precision_recall_curve(y_test, probs)
         pr_auc = auc(recall, precision)
         axes[1].plot(recall, precision, linewidth=2, label=f'PR (AUC = {pr_auc:.3f})')
